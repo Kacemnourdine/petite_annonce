@@ -1,0 +1,70 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello AnnoncesController!{% endblock %}
+
+{% block body %}
+<h1>Gerer les annonces</h1>
+<a href="{{ path('admin_ajouter_annonce') }}" class="btn shadow-1 rounded-1 blue">Ajouter Annonces</a>
+<table class="table striped">
+    <thead>
+        <tr>
+            <th>ID </th>
+            <th>TITRE </th>
+            <th>CRETED AT </th>
+            <th>ACTIVE</th>
+            <th>ACTIONS </th>
+
+        </tr>
+    </thead>
+    <tbody>
+        {% for annonce in annorepo %}
+        <tr>
+            <td>{{ annonce.id }}</td>
+            <td>{{ annonce.title }}</td>
+            <td>{{ annonce.createdAt|date }}</td>
+            <td>
+                 <label class="form-switch mt-2">
+                Off
+                <input type="checkbox" {{ (annonce.active) ? 'checked' : '' }} data-id="{{ annonce.id }}" />
+                <span class="slider"></span>
+                On
+                </label>
+
+            </td>
+            <td></td>
+            <td class="text-center">
+                <a href="{{ path('admin_modifier_annonce', {id: annonce.id}) }} data-id="{{ annonce.id }}" data-title="{{ annonce.title }} class="btn rounded-1 primary press modal-trigger>Modifier</a>
+                <a href="{{ path('admin_suprimer_annonce', {id: annonce.id}) }}" class="btn rounded-1 primary press modal-trigger" data-target="modal-delete">Suprimer</a>
+            </td>
+        </tr>
+        {% endfor %}    
+    </tbody>
+</table>
+<div class="modal shadow-1 white falling" id="modal-delete" data-ax="modal">
+    <div class="modal-header">Supprimer une annonce</div>
+  
+    <div class="divider"></div>
+  
+    <div class="modal-content">
+     <a href="" class="btn blue"> Supprimer </a>
+    </div>
+  
+    <div class="divider"></div>
+  
+    <div class="modal-footer">
+      <button data-target="modal-delete" class="ml-auto btn shadow-1 rounded-1 small primary modal-trigger">Close</button>
+    </div>
+  </div>
+{% endblock %}
+
+{% block javescript %}
+
+let modal = new Axentix.Modal('#modal-delete');
+
+// With options
+let modal = new Axentix.Modal('#modal-delete', {
+  overlay: false,
+  animationDuration: 500
+});
+
+{% endblock%}

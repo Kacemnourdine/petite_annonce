@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello AdminController!{% endblock %}
+
+{% block body %}
+<h1>Gerer les categories</h1>
+<a href="{{ path('admin_ajouter_categorie') }}" class="btn shadow-1 rounded-1 blue">Ajouter Categorie</a>
+<table class="table striped">
+    <thead>
+        <tr>
+            <th>ID </th>
+            <th>NOM </th>
+            <th>PARENT </th>
+            <th>ACTIONS </th>
+
+        </tr>
+    </thead>
+    <tbody>
+        {% for categorie in catsrepo %}
+        <tr>
+            <td>{{ categorie.id }}</td>
+            <td>{{ categorie.name }}</td>
+            <td> parent </td>
+            <td class="text-center">
+                <a href="{{ path('admin_modifier_categorie', {id: categorie.id}) }}" class="btn blue">Modifier</a>
+            </td>
+        </tr>
+        {% endfor %}    
+    </tbody>
+</table>
+{% endblock %}

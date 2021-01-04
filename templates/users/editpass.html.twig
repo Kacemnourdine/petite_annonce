@@ -1,0 +1,25 @@
+ {% extends 'users.html.twig' %}
+
+{% block title %}Modifie de password {% endblock %}
+
+{% block body %}
+{% for error in app.flashes('error') %}
+<div class="p-3 my-2 rounded-2 danger">{{ error }}</div>
+{% endfor %}
+<form method="POST">
+  <div class="grix xs1">
+    <div class="form-field inline">
+      <label for="name">Password</label>
+      <input type="password" id="pass" name="pass" class="form-control rounded-1" placeholder="Entre password" />
+    </div>
+  </div>
+  <div class="grix xs1">
+    <div class="form-field inline">
+      <label for="name">Confirmer password</label>
+      <input type="password" id="pass2" name="pass2" class="form-control rounded-1" placeholder="Entre password" />
+    </div>
+  </div>
+  <button class="btn blue">Valider</button>
+</form>
+
+{% endblock %}

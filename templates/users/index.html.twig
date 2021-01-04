@@ -1,0 +1,36 @@
+{% extends 'users.html.twig' %}
+
+{% block title %}Profile de  {{app.user.name}} {{app.user.firstname}}{% endblock %}
+
+{% block body %}
+{% for message in app.flashes('message') %}
+<div class="p-3 my-2 rounded-2 success">{{ message }}</div>
+{% endfor %}
+<div class="col-xs4">
+    <h1> Profile de : {{app.user.name}} {{app.user.firstname}} </h1>
+  </div>
+
+<div class="grix xs2 container">
+  <div>NOM :</div>
+  <div>{{ app.user.name}}</div>
+  <div>PRENOM :</div>
+  <div>{{ app.user.firstname }}</div>
+  <div>EMAIL :</div>
+  <div> {{ app.user.email }}</div>
+</div>
+<div class="col-sx4">
+      <a href="{{ path('users_modifier_profile')}}" class="btn shadow-1 rounded-1 blue">Modifier</a>
+      <a href="" class="btn shadow-1 rounded-1 blue">Modifier le Mot de passe</a>
+      <a href="{{ path('users_data')}}" class="btn shadow-1 rounded-1 gris">Voir Mes Donnees personnelle</a>
+
+</div> 
+<div class="col-xs4">
+    <h2>Annonce de {{app.user.firstname}} {{app.user.name}}( {{ app.user.annonces|length }})</h2>
+</div>
+<div class="col-xs4">
+    {% for annonce in app.user.annonces %}
+     <p class="col-xs1">Titre : {{ annonce.title }}</p>
+     
+    {% endfor %}
+</div>
+{% endblock %}

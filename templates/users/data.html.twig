@@ -1,0 +1,33 @@
+{% extends 'users.html.twig' %}
+
+{% block title %} 
+
+ {% endblock%}
+  
+{% block body %} 
+
+<h1> Donnees personnelle de : {{app.user.name}} {{app.user.firstname}} </h1>
+<a href="{{ path('users_data_download')}}" class="btn shadow-1 rounded-1 blue">Telecharger donnees</a>
+
+<div class="grix xs2 container">
+  <div>NOM :</div>
+  <div>{{ app.user.name}}</div>
+  <div>PRENOM :</div>
+  <div>{{ app.user.firstname }}</div>
+  <div>EMAIL :</div>
+  <div> {{ app.user.email }}</div>
+</div>
+<div class="col-xs-4">
+    <h1> Annonce de : {{app.user.name}} {{app.user.firstname}} </h1>
+</div>
+{% for annonce in app.user.annonces %}
+<div class="grix xs2 container">
+    <div>Titre :</div>
+    <div>{{ annonce.title}}</div>
+    <div>contenu :</div>
+    <div>{{ annonce.content }}</div>
+<img src="{{ asset('uploads/images/annonces/1.jpg') | imagine_filter('square') }}" alt="">
+</div>
+
+{% endfor %}
+{% endblock%}
